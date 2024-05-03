@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="titulo">Editar Película</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <figure>
+        <img src="/img/logo-DH.png" alt="Logo Digital House">
+      </figure>
+    <h1 class="titulo">Película a Editar:  <%= Movie.title %></h1>
+    <section class="formulario">
+        
+        <form action="/movies/update/<%= locals.errors ? locals.id : Movie.id %>?_method=PUT" method="POST">
+            <label for="title">Title </label>
+            <p><input type="text" name="title" id="title" value="<%= locals.errors ? locals.old.title : Movie.title %>" ></p>
+            <% if (locals.errors) { %>
+                <div class="error"><%= errors?.title?.msg %></div>
+            <% } %>
+
+            <label for="rating">Rating </label>
+            <p><input type="number" name="rating" id="rating" value="<%= locals.errors ? locals.old.rating : Movie.rating %>" ></p>
+            <% if (locals.errors) { %>
+                <div class="error"><%= errors?.rating?.msg %></div>
+            <% } %>
+
+            <label for="awards">Awards </label>
+            <p><input type="number" name="awards" id="awards" value="<%= locals.errors ? locals.old.awards : Movie.awards %>" ></p>
+            <% if (locals.errors) { %>
+                <div class="error"><%= errors?.awards?.msg %></div>
+            <% } %>
+
+            <label for="release_date">Release date </label>
+            <p><input type="date" name="release_date" id="release_date" value="<%= locals.errors ? locals.old.release_date : Movie.release_date.toISOString().split('T')[0] %>" ></p>
+            <% if (locals.errors) { %>
+                <div class="error"><%= errors?.release_date?.msg %></div>
+            <% } %>
+
+            <label for="length">Length </label>
+            <p><input type="number" name="length" id="" value="<%= locals.errors ? locals.old.length : Movie.length %>" ></p>
+            <% if (locals.errors) { %>
+                <div class="error"><%= errors?.length?.msg %></div>
+            <% } %>
+
+            <br>
+            <p> <button class="botonAgregar btn-green" type="submit">Actualizar</button>
+            <br>
+            <br>
+        
+            <a  class="botonVolver" href="/movies">Listado de Películas</a></p>
+        </form>
+    </section>
+</body>
+
+</html>
